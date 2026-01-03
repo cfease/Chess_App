@@ -9,3 +9,4 @@ class Move:
     capture: bool
     promotion: Optional[str]
     castle: Optional[str]      # 'O-O' or 'O-O-O'
+
