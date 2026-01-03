@@ -52,6 +52,35 @@ class Board:
         self.grid[move.target] = self.grid[source]
         del self.grid[source]
 
-
     def piece_at(self, square):
         return self.grid.get(square)
+    
+# --- Disambiguation helper functions ---
+
+def square_to_coords(square):
+    file, rank = square
+    return FILES.index(file), RANKS.index(rank)
+
+def can_reach(piece, source, target):
+    sx, sy = square_to_coords(source)
+    tx, ty = square_to_coords(target)
+
+    dx = tx - sx
+    dy = ty - sy
+
+    if piece.kind == "N":
+        return (abs(dx), abs(dy)) in {(1, 2), (2, 1)}
+
+    if piece.kind == "B":
+        return abs(dx) == abs(dy)
+
+    if piece.kind == "R":
+        return dx == 0 or dy == 0
+
+    if piece.kind == "Q":
+        return dx == 0 or dy == 0 or abs(dx) == abs(dy)
+
+    if piece.kind == "K":
+        return max(abs(dx), abs(dy)) == 1
+
+    return False
