@@ -51,3 +51,7 @@ class Board:
 
         self.grid[move.target] = self.grid[source]
         del self.grid[source]
+
+
+    def piece_at(self, square):
+        return self.grid.get(square)
