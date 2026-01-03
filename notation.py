@@ -17,6 +17,7 @@ MOVE_RE = re.compile(
 
 def parse_algebraic(move_str: str) -> Move:
     move_str = move_str.strip()
+    move_str = move_str.replace("+", "").replace("#", "")
 
     m = MOVE_RE.fullmatch(move_str)
     if not m:
