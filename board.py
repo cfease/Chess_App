@@ -30,6 +30,25 @@ def path_clear(board, source, target):
     return True
 
 def can_reach(board, piece, source, target, capture):
+
+    # ----------------------------------------------
+    # Ensures not capturing own piece
+
+    # Check target piece
+    target_piece = board.grid.get(target)
+    if target_piece and target_piece.color == piece.color:
+        return False
+    
+    # Capture must match board state
+    if capture and not target_piece: 
+        return False
+    
+    # 
+    if not capture and target_piece:
+        return False
+    
+    # ----------------------------------------------
+
     sx, sy = square_to_coords(source)
     tx, ty = square_to_coords(target)
 
